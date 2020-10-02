@@ -113,30 +113,34 @@ function logout() {
 //     })
 // }
 
-function addSearchFood() {
+function addSearchFood(event) {//search-food/:keyword
+  event.preventDefault()
   let keyword = $('#search-food').val()
   $.ajax({
-    url: `${baseUrl}/search-food/${keyword}`, //router.get('/search-food/:keyword', searchFood)
+    url: `${baseurl}/search-food/${keyword}`, //router.get('/search-food/:keyword', searchFood)
     method: 'get',
     headers: {
       token: localStorage.token
     }
   })
     .done(data => {
-      console.log(data.data);
+      console.log(data.data), '<<<search food';
       $('#container-search').empty()
       data.restaurants.forEach(el => {
         $('#container-search').append(`
-            <tr>
-            <td style="font-family: 'Tangerine', serif; font-size:35px;">Restaurant Name : ${el.name}</td>
-            <td style="font-family: 'Tangerine', serif; font-size:35px;">Link : ${el.url}</td>
-            <td style="font-family: 'Tangerine', serif; font-size:35px;">Address : ${el.location.address}</td>
-            <td style="font-family: 'Tangerine', serif; font-size:35px;">Photos : ${el.images}</td>
-            <td style="font-family: 'Tangerine', serif; font-size:35px;">Menus : ${el.menus}</td>
-            <td style="font-family: 'Tangerine', serif; font-size:35px;">Weather : ${el.weather.description}</td>
-            <td style="font-family: 'Tangerine', serif; font-size:35px;">Logo : </label><img src="${el.weather.imageUrl}</td>
-            </td>
-            </tr>`)
+        <div class="col-3 mt-3">
+        <div class="card">
+          <img class="card-img-top" src="${el.images}">
+          <div class="card-body">
+            <h5 class="card-title">${el.name}</h5>
+            <p class="card-text">${el.location.address}</p>
+            <p class="card-text">${el.weather.description}</p>
+            <img class="card-img-top" src="${el.weather.imageUrl}">
+            <a href="${el.url}" class="btn btn-primary">LINK</a>
+            
+          </div>
+        </div>
+        </div>`)
       })
     })
     .fail(err => {

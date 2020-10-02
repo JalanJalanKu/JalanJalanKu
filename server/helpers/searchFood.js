@@ -9,7 +9,7 @@ async function searchFood(req, res, next) {
             method: 'get',
             url: `https://developers.zomato.com/api/v2.1/search?q=${keyword}`,
             headers: {
-                'user-key': 'c9d33c4ca5a705fbabb08eff4a198b51'
+                'user-key': '98e8173c22496c53896ee65306f31a78'
             }
         })
         let arr = await restaurantsArr.data.restaurants.map(async elem => {
@@ -19,7 +19,7 @@ async function searchFood(req, res, next) {
                 name: elem.restaurant.name,
                 url: elem.restaurant.url,
                 location: elem.restaurant.location,
-                images: elem.restaurant.photos_url,
+                images: elem.restaurant.featured_image,
                 menus: elem.restaurant.menu_url,
                 weather
             }
