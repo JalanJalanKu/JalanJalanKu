@@ -102,7 +102,7 @@ function onSignIn(googleUser) {
 }
 
 function addSearchFood() {
-  const { keyword } = req.params
+  let keyword = $('#search-food').val()
   $.ajax({
     url: `${baseUrl}/search-food/${keyword}`, //router.get('/search-food/:keyword', searchFood)
     method: 'get',
@@ -116,11 +116,15 @@ function addSearchFood() {
       data.restaurants.forEach(el => {
         $('#container-search').append(`
         <li>
-          <label>Name : ${el.restaurant.name}</label><br>
-          <label>Restaurant : ${el.restaurant.url}</label><br>
-          <label>Location : ${el.restaurant.location.longitude}</label><br>
-          <label>Latitude : ${el.restaurant.location.latitude}</label><br>
-        </li>`)
+          <label>Restaurant Name : ${el.name}</label><br>
+          <label>Link : ${el.url}</label><br>
+          <label>Address : ${el.location.address}</label><br>
+          <label>Photos : ${el.images}</label><br>
+          <label>Menus : ${el.menus}</label><br>
+          <label>Weather : ${el.weather.description}</label><br>
+          <label>Logo : </label><img src="${el.weather.imageUrl}"><br>
+        </li><br>
+        `)
       });
     })
     .fail(err => {
