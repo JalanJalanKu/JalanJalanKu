@@ -38,7 +38,7 @@ function checkLogin() {
     $("#login-page").hide()
     $("#register-page").hide()
     $("#error").hide()
-    fetchFood()
+    // fetchFood()
   } else {
     $("#home-page").hide()
     $("#login-page").show()
@@ -102,26 +102,25 @@ function onSignIn(googleUser) {
 }
 
 function addSearchFood() {
+  const { keyword } = req.params
   $.ajax({
-    url: `${baseUrl}/search-food/:keyword`, //router.get('/search-food/:keyword', searchFood)
+    url: `${baseUrl}/search-food/${keyword}`, //router.get('/search-food/:keyword', searchFood)
     method: 'get',
     headers: {
       token: localStorage.token
     }
   })
     .done(data => {
-      console.log(data.todos, '<<<<<data todo')
+      console.log(data.restaurants, '<<<<<data restaurant')
       $('#container-search').empty()
-      data.todos.forEach(el => {
+      data.restaurants.forEach(el => {
         $('#container-search').append(`
         <li>
-          <label>title : ${el.title}</label><br>
-          <label>description : ${el.description}</label><br>
-          <label>status : ${el.status}</label><br>
-          <label>due_date : ${el.due_date}</label><br>
-        </li><br>
-        <button onclick="editTodo(${el.id}, '${el.title}', '${el.description}', ${el.status}, ${el.due_date})" class="btn btn-primary">Edit</button>
-        `)
+          <label>Name : ${el.restaurant.name}</label><br>
+          <label>Restaurant : ${el.restaurant.url}</label><br>
+          <label>Location : ${el.restaurant.location.longitude}</label><br>
+          <label>Latitude : ${el.restaurant.location.latitude}</label><br>
+        </li>`)
       });
     })
     .fail(err => {
