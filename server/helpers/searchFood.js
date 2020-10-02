@@ -14,7 +14,7 @@ async function searchFood(req, res, next) {
         })
         let arr = await restaurantsArr.data.restaurants.map(async elem => {
             let weather = await getWeather(elem.restaurant.location.longitude, elem.restaurant.location.latitude)
-            console.log(weather, 'INI DI SEARCHFOOD');
+            // console.log(weather, 'INI DI SEARCHFOOD');
             return {
                 name: elem.restaurant.name,
                 url: elem.restaurant.url,
@@ -25,7 +25,7 @@ async function searchFood(req, res, next) {
             }
         })
         const restaurants = await Promise.all(arr)
-        await console.log(restaurants, 'INI SEARCHFOOD BAWAH');
+        // await console.log(restaurants, 'INI SEARCHFOOD BAWAH');
         await res.status(200).json({ restaurants })
     }
     catch (err) {

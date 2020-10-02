@@ -36,12 +36,14 @@ function checkLogin() {
     $("#login-page").hide()
     $("#register-page").hide()
     $("#error").hide()
+    $('#quotes').show()
     // fetchFood()
   } else {
     $("#home-page").hide()
     $("#login-page").show()
     $("#register-page").hide()
     $("#error").hide()
+    $('#quotes').hide()
   }
 }
 
@@ -112,6 +114,21 @@ function logout() {
 //       console.log(err)
 //     })
 // }
+
+function quotes() {
+  //$('#quotes').append(`${data.quote}`) //author, quote
+  $.ajax({
+    url: `${baseurl}/quotes`,
+    method: 'get'
+  })
+    .done(data => {
+      console.log(data, "<<<<ini data quotes")
+      $('#quotes').append(`<h5 id="quotes">${data.quote}</h5>`) //author, quote
+    })
+    .fail(err => {
+      console.log(err);
+    })
+}
 
 function addSearchFood(event) {//search-food/:keyword
   event.preventDefault()
