@@ -1,6 +1,7 @@
 const { User } = require('../models')
 const hashPassword = require('../helpers/hashPassword')
 const { generateToken } = require('../helpers/jwt')
+const { OAuth2Client } = require('google-auth-library');
 
 class Controller {
     static registerUser(req, res, next) {
