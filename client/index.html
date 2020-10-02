@@ -1,7 +1,7 @@
 <html>
-<meta name="google-signin-client_id" content="717853687891-k9ve786nhnbslni505dc80dk9esvra33.apps.googleusercontent.com">
 
 <head>
+
   <title> Jalan Jalan Yuk</title>
   <!--Bootsrap 4 CDN-->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
@@ -17,12 +17,12 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <script src="https://apis.google.com/js/platform.js" async defer></script>
 
   <meta name="google-signin-scope" content="profile email">
   <meta name="google-signin-client_id"
-    content="484267733566-81qe2oskvl9a4dn4joei23v0n6abqi61.apps.googleusercontent.com">
-  <script src="https://apis.google.com/js/platform.js" async defer></script>
+    content="717853687891-k9ve786nhnbslni505dc80dk9esvra33.apps.googleusercontent.com">
+
+
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
     integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
@@ -30,7 +30,7 @@
 
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
     crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
@@ -38,25 +38,24 @@
     crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
     integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
-    crossorigin="anonymous"></script>
-  <script src="main.js"></script>
+    crossorigin="anonymous"></script> -->
 </head>
 
 <body>
   <!-- Login -->
-  <section id="login_page">
+  <section id="login-page">
     <div>
       <h3 class="text-center pt-5" style="color: lightskyblue; font-family: 'Sansita Swashed', cursive;">Welcome</h3>
       <div class="container">
         <div id="login-row" class="row justify-content-center align-items-center">
           <div id="login-column" class="col-md-6">
             <div id="login-box" class="col-md-12">
-              <form id="login-form" class="form" action="" method="post">
+              <form onsubmit="login(event)" id="login-form" class="form" action="" method="post">
                 <h3 class="text-center text-info" style="font-family: 'Sansita Swashed', cursive;">Login</h3>
                 <div class="form-group">
                   <label for="email" class="text-info"
                     style="font-family: 'Sansita Swashed', cursive;">Email:</label><br>
-                  <input type="text" name="email" id="email-form" class="form-control">
+                  <input type="text" name="email" id="email" class="form-control">
                 </div>
                 <div class="form-group">
                   <label for="password" class="text-info"
@@ -66,10 +65,13 @@
                 <div class="form-group">
                   <input type="submit" name="submit" class="btn btn-info btn-md" value="submit">
                 </div><br>
-                <div id="register-link" class="text-right">
+                <!-- <div id="register-link" class="text-right">
                   <a href="#" class="text-info" style="font-family: 'Sansita Swashed', cursive;">Login here</a>
-                </div>
+                </div> -->
               </form>
+              <button onclick="checkRegister()" class="btn btn-secondary">Register</button><br><br>
+              <b>Or, use another account</b>
+              <div class="g-signin2" data-onsuccess="onSignIn"></div>
             </div>
           </div>
         </div>
@@ -78,7 +80,7 @@
   </section>
 
   <!-- Register -->
-  <section id="register_page">
+  <section id="register-page">
     <div>
       <h3 class="text-center pt-5" style="color: lightskyblue; font-family: 'Sansita Swashed', cursive;">Create an
         Account</h3>
@@ -86,17 +88,17 @@
         <div id="register-row" class="row justify-content-center align-items-center">
           <div id="register-column" class="col-md-6">
             <div id="register-box" class="col-md-12">
-              <form id="register-form" class="form" action="" method="post">
+              <form onsubmit="register(event)" id="register-form" class="form" action="" method="post">
                 <h3 class="text-center text-info" style="font-family: 'Sansita Swashed', cursive;">Register</h3>
                 <div class="form-group">
                   <label for="email" class="text-info"
                     style="font-family: 'Sansita Swashed', cursive;">Email:</label><br>
-                  <input type="text" name="email" id="email-register" class="form-control">
+                  <input type="email" name="email" id="email-register" class="form-control">
                 </div>
                 <div class="form-group">
                   <label for="password" class="text-info"
                     style="font-family: 'Sansita Swashed', cursive;">Password:</label><br>
-                  <input type="text" name="password" id="password" class="form-control">
+                  <input type="password" name="password" id="password" class="form-control">
                 </div>
                 <div class="form-group">
                   <input type="submit" name="submit" class="btn btn-info btn-md" value="submit">
@@ -113,7 +115,8 @@
   </section>
 
   <!-- Homepage -->
-  <section id='homepagea'>
+  <section id='home-page'>
+    <button onclick="logout()" class="btn btn-danger">logout</button>
     <!-- Search form -->
     <div>
       <h2 style="text-align: center; font-family: 'Sansita Swashed', cursive;">Homepage</h2>
@@ -127,6 +130,13 @@
       </form>
     </div>
   </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous"></script>
+  <script src="./main.js"></script>
 </body>
+
 
 </html>
