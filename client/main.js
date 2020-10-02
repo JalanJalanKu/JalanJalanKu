@@ -102,25 +102,28 @@ function onSignIn(googleUser) {
 }
 
 function addSearchFood() {
+  let keyword = $('#search-food').val()
   $.ajax({
-    url: `${baseUrl}/search-food/:keyword`, //router.get('/search-food/:keyword', searchFood)
+    url: `${baseUrl}/search-food/${keyword}`, //router.get('/search-food/:keyword', searchFood)
     method: 'get',
     headers: {
       token: localStorage.token
     }
   })
     .done(data => {
-      console.log(data.todos, '<<<<<data todo')
+      console.log(data.restaurants, '<<<<<data todo')
       $('#container-search').empty()
-      data.todos.forEach(el => {
+      data.restaurants.forEach(el => {
         $('#container-search').append(`
         <li>
-          <label>title : ${el.title}</label><br>
-          <label>description : ${el.description}</label><br>
-          <label>status : ${el.status}</label><br>
-          <label>due_date : ${el.due_date}</label><br>
+          <label>Restaurant Name : ${el.name}</label><br>
+          <label>Link : ${el.url}</label><br>
+          <label>Address : ${el.location.address}</label><br>
+          <label>Photos : ${el.images}</label><br>
+          <label>Menus : ${el.menus}</label><br>
+          <label>Weather : ${el.weather.description}</label><br>
+          <label>Logo : ${el.weather.imageUrl}</label><br>
         </li><br>
-        <button onclick="editTodo(${el.id}, '${el.title}', '${el.description}', ${el.status}, ${el.due_date})" class="btn btn-primary">Edit</button>
         `)
       });
     })
